@@ -1,0 +1,22 @@
+// Check if the result is valid and if it contains any rows
+if ($result) {
+    if ($result->num_rows > 0) {
+        echo "<h2>Tournament History</h2>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<div class='tournament'>";
+            echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";
+            echo "<p>Start Date: " . htmlspecialchars($row['start_date']) . "</p>";
+            echo "<p>Entry Fee: $" . htmlspecialchars($row['entry_fee']) . "</p>";
+            echo "<p>Prize Pool: $" . htmlspecialchars($row['prize_pool']) . "</p>";
+            echo "</div>";
+        }
+    } else {
+        echo "No tournament history found.";
+    }
+} else {
+    echo "Error executing query: " . htmlspecialchars($conn->error);
+}
+
+$stmt->close();
+$conn->close();
+?>
